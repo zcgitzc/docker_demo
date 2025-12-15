@@ -2,6 +2,9 @@
 FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /app
 
+# 配置 Maven 使用阿里云镜像仓库
+COPY maven-settings.xml /root/.m2/settings.xml
+
 # 复制 pom.xml 并下载依赖
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
